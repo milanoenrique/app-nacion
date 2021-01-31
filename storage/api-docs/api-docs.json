@@ -1,0 +1,107 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API SWAPI INVENTORY",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/inventory"
+        }
+    ],
+    "paths": {
+        "/{type}/search": {
+            "get": {
+                "summary": "Buscar Naves o Vehiculos",
+                "operationId": "App\\Http\\Controllers\\StarshipController::get_count_starships",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Type to search in the inventory",
+                        "required": true,
+                        "example": "vehicles"
+                    },
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show details from models of starships or vehicles, for everithing or for only one"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "404": {
+                        "description": "Not data found"
+                    }
+                }
+            }
+        },
+        "/{type}/modify-quantity": {
+            "post": {
+                "summary": "Add or substract quantity to inventory",
+                "operationId": "App\\Http\\Controllers\\StarshipController::addToInventory",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Type to search in the inventory",
+                        "required": true,
+                        "example": "vehicles"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Model and quantity",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "model",
+                                    "quantity",
+                                    "action"
+                                ],
+                                "properties": {
+                                    "model": {
+                                        "type": "string",
+                                        "example": "Bantha-II"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "100"
+                                    },
+                                    "action": {
+                                        "type": "string",
+                                        "example": "add"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add or sbustract quantity of inventory for a vehicle or starship"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "404": {
+                        "description": "Not data found"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
