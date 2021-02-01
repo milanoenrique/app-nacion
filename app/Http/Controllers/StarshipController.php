@@ -26,7 +26,7 @@ class StarshipController extends Controller
     * @OA\Get(
     *
     *     path="/{type}/search",
-    *     summary="Buscar Naves o Vehiculos",
+    *     summary="Search starship or vehicles",
     *     @OA\Parameter(
     *     required = true,
     *     description = "Type to search in the inventory",
@@ -103,7 +103,7 @@ class StarshipController extends Controller
 /**
  * @OA\Post(
  * path="/{type}/modify-quantity",
- * summary="Add or substract quantity to inventory",
+ * summary="Add or substract quantity to inventory for specific model",
  * @OA\Parameter(
  * required = true,
  * description = "Type to search in the inventory",
